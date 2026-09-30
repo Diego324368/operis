@@ -1,0 +1,13 @@
+services:
+  operis:
+    build: .
+    ports: ["3333:3333"]
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?defina JWT_SECRET no arquivo .env}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@operis.local}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?defina ADMIN_PASSWORD no arquivo .env}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}   # use true atrás de HTTPS
+    volumes: ["operis-data:/data"]
+    restart: unless-stopped
+volumes:
+  operis-data:
